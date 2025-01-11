@@ -1,7 +1,11 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
-export const Search = () => {
+interface SearchProps {
+  btnSearch?: boolean;
+}
+
+export const Search = ({ btnSearch }: SearchProps) => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -14,7 +18,7 @@ export const Search = () => {
     e.preventDefault();
     if (!search) return;
 
-    navigate(`items/?search=${search}`);
+    navigate(`items?search=${search}`);
   };
 
   return (
@@ -30,13 +34,15 @@ export const Search = () => {
         onChange={handleChange}
         ref={inputRef}
       />
-      <button
-        type="submit"
-        disabled={!search}
-        className="p-2 bg-yellow-600 hover:bg-yellow-700 text-white text-xl rounded-md disabled:bg-opacity-25 disabled:text-gray-400"
-      >
-        Buscar
-      </button>
+      {btnSearch && (
+        <button
+          type="submit"
+          disabled={!search}
+          className="p-2 bg-yellow-600 hover:bg-yellow-700 text-white text-xl rounded-md disabled:bg-opacity-25 disabled:text-gray-400"
+        >
+          Buscar
+        </button>
+      )}
     </form>
   );
 };
