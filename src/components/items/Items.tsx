@@ -5,6 +5,7 @@ import { useProducts } from "../../hooks/useProducts";
 import { filterItems } from "../../utils/filterItems";
 import queryString from "query-string";
 import logo from "../../assets/logo.webp";
+import { ItemsList } from "./list/ItemsList";
 
 export const Items = () => {
   const { items, isLoading } = useProducts();
@@ -27,7 +28,14 @@ export const Items = () => {
         {filteredItems.length}
       </h2>
 
-      {isLoading ? <p>Cargando...</p> : <ItemsCategory items={filteredItems} />}
+      {isLoading ? (
+        <p>Cargando...</p>
+      ) : (
+        <>
+          <ItemsCategory items={filteredItems} />
+          <ItemsList items={filteredItems} />
+        </>
+      )}
     </div>
   );
 };

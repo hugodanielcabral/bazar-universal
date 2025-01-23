@@ -26,7 +26,7 @@ export const ItemsCategory = ({ items }: ItemsCategoryProps) => {
   const categoryTotals = calculateCategoryTotals(items);
 
   return (
-    <ul className="bg-yellow-600 flex flex-col p-2 rounded-md gap-2">
+    <ul className="bg-yellow-600 flex flex-wrap p-2 rounded-md gap-2">
       {categoryTotals.map((category) => (
         <li key={category.name}>
           <span className="font-bold">{category.name}:</span>

@@ -1,3 +1,4 @@
+import queryString from "query-string";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -6,7 +7,10 @@ interface SearchProps {
 }
 
 export const Search = ({ btnSearch }: SearchProps) => {
-  const [search, setSearch] = useState("");
+  const searchTerm = queryString.parse(location.search);
+  const [search, setSearch] = useState(
+    typeof searchTerm.search === "string" ? searchTerm.search : ""
+  );
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
 
